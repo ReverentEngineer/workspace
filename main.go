@@ -63,6 +63,18 @@ func HandleArgs(args []string, config *ManagerConfig) error {
     client.Droplets.Create(context.TODO(), createRequest)
   case "stop":
     client.Droplets.DeleteByTag(context.TODO(), WorkspaceTag)
+  case "ssh":
+    workspaces, _, _ := client.Droplets.ListByTag(context.TODO(), WorkspaceTag, nil)
+    if len(workspaces) == 0 {
+      fmt.Println("Workspace not available.")
+      return nil
+    } else if len(workspaces) > 1 {
+      fmt.Println("Too many workspaces.")
+      return nil
+    } else {
+      ipv4,_ := workspaces[0].PublicIPv4()
+      fmt.Printf("ssh root@%s", ipv4)
+    }
   default:
     err = errors.New("Invalid command.")
   }
@@ -71,7 +83,7 @@ func HandleArgs(args []string, config *ManagerConfig) error {
 }
 
 func PrintUsage() {
-  fmt.Println("usage: workspace <start|stop>")
+  fmt.Println("usage: workspace <start|ssh|stop>")
 }
 
 func main() {
