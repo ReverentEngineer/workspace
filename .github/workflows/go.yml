@@ -26,3 +26,8 @@ jobs:
 
     - name: Build
       run: go build -v .
+    - name: Upload
+      uses: actions/upload-artifact@v1
+      with:
+        name: workspace
+        path: workspace
