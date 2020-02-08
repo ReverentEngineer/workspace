@@ -1,12 +1,14 @@
 SOURCES = $(wildcard *.go)
-INSTALL_PREFIX := /usr/local
+ifeq ($(PREFIX),)
+    PREFIX := /usr/local
+endif
 
 workspace: $(SOURCES)
 	go build -o $@
 
 install: workspace
-	cp $^ $(INSTALL_PREFIX)/bin/$^
-	chmod 755 $(INSTALL_PREFIX)/bin/$^
+	cp $^ $(PREFIX)/bin/$^
+	chmod 755 $(PREFIX)/bin/$^
 
 clean:
 	rm -f ./workspace
