@@ -19,6 +19,7 @@ type ManagerConfig struct {
   Slug         string
   Size         string
   Region       string
+  Ssh_Fingerprint  string
 }
 
 func (c ManagerConfig) Token() (*oauth2.Token, error) {
@@ -49,6 +50,11 @@ func HandleArgs(args []string, config *ManagerConfig) error {
       Name:   WorkspaceTag,
       Region: (*config).Region,
       Size:   (*config).Size,
+      SSHKeys: []godo.DropletCreateSSHKey{
+        godo.DropletCreateSSHKey{
+          Fingerprint: (*config).Ssh_Fingerprint,
+        },
+      },
       Tags: []string{WorkspaceTag},
       Image: godo.DropletCreateImage{
         Slug: (*config).Slug,

@@ -10,6 +10,7 @@ access_token: {access_token}
 slug: centos-8-x86
 size: s-1vcpu-1gb
 region: nyc3
+ssh_fingerprint: {ssh fingerprint}
 ```
 
 # Usage
