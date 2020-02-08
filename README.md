@@ -1,3 +1,5 @@
+![Go](https://github.com/ReverentEngineer/workspace/workflows/Go/badge.svg)
+
 # Summary
 
 Manages workspace in DigitalOcean
